@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "start": "nodemon server.ts",
-    "test": "vitest",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "build": "tsc"
   },
   "devDependencies": {

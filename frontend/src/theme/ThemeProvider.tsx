@@ -41,7 +41,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           token: {
             colorPrimary: '#5b8cff',
             borderRadius: 10
-          }
+          },
+          cssVar: true
         }}
       >
         {/* AntD App gives you message/notification context globally */}

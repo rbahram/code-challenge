@@ -251,9 +251,7 @@ export default function Home({ socket }: Props) {
         </Card>
       </Content>
 
-      <Footer style={{ textAlign: 'center', opacity: 0.7 }}>
-        <Text type="secondary">Built with Socket.IO + Ant Design</Text>
-      </Footer>
+      <Footer style={{ textAlign: 'center', opacity: 0.7 }}></Footer>
 
       <Modal
         open={!!pendingInviteFrom}

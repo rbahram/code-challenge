@@ -88,4 +88,50 @@ describe('chat flow', () => {
 
     a.emit('connect-request', { fromId: 'alice', toId: 'bob' });
   });
+
+
+test('only room members receive messages', (done) => {
+  const base = urlFor(server);
+  const a: Socket = ioc(base); 
+  const b: Socket = ioc(base); 
+  const c: Socket = ioc(base); 
+
+  a.emit('register', 'alice');
+  b.emit('register', 'bob');
+  c.emit('register', 'charlie');
+
+  let bobGotMessage = false;
+  let charlieGotMessage = false;
+
+  b.on('incoming-invite', ({ fromId }) => {
+    expect(fromId).toBe('alice');
+    b.emit('accept', { fromId: 'bob', toId: 'alice', inviteId: 'x' });
+  });
+
+  a.on('connected', ({ roomId }) => {
+    a.emit('message', { roomId, senderId: 'alice', text: 'secret' });
+  });
+
+  b.on('message', (m) => {
+    expect(m.text).toBe('secret');
+    bobGotMessage = true;
+  });
+
+  c.on('message', () => {
+    charlieGotMessage = true;
+  });
+
+  // Give the events a moment to flow, then assert and clean up.
+  setTimeout(() => {
+    expect(bobGotMessage).toBe(true);
+    expect(charlieGotMessage).toBe(false);
+
+    a.disconnect();
+    b.disconnect();
+    c.disconnect();
+    done();
+  }, 300);
+
+  a.emit('connect-request', { fromId: 'alice', toId: 'bob' });
+});
 });

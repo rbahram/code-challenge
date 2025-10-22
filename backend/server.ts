@@ -11,14 +11,16 @@ const app = express();
 const router = express.Router();
 
 const httpServer = http.createServer(app);
-const io = new IOServer(httpServer, 
-  {
-    cors: {
-      origin: CONFIG.CORS_ORIGIN,
-      methods: ['GET', 'POST']
-    }
+const io = new IOServer(httpServer, {
+  path: '/socket.io', 
+  cors: {
+    origin: [
+      'http://localhost:5173', 
+      'https://*.ngrok-free.app' // allow any ngrok tunnel (for dev)
+    ],
+    methods: ['GET', 'POST']
   }
-);
+});
 
 app.use(router);
 app.use(cors(

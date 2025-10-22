@@ -1,13 +1,11 @@
-import { BrowserRouter, Routes as RouterRoutes, Route } from 'react-router';
+import { BrowserRouter, Routes as RouterRoutes, Route } from 'react-router-dom';
 import { io } from 'socket.io-client';
-
-import config from '../config';
 
 // Routes
 import Chat from './Chat';
 import Home from './Home';
 
-const socket = io(config.SOCKET_ENDPOINT, { transports: ['websocket', 'polling', 'flashsocket'] });
+const socket = io('/', { path: '/socket.io', transports: ['websocket', 'polling', 'flashsocket'] });
 
 export default function Routes() {
   return (

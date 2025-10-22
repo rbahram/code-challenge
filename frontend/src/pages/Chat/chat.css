@@ -35,3 +35,43 @@
     opacity: 1;
   }
 }
+
+.msg-row {
+  display: flex;
+  gap: 8px;
+  margin: 6px 0;
+}
+
+.msg-mine {
+  justify-content: flex-end;
+}
+.msg-theirs {
+  justify-content: flex-start;
+}
+
+.msg-bubble {
+  max-width: 82%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  line-height: 1.35;
+  font-size: 14px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+}
+
+.msg-bubble.mine {
+  background: var(--ant-color-primary-bg);
+  border: 1px solid var(--ant-color-primary-border);
+}
+
+.msg-bubble.theirs {
+  background: var(--ant-color-fill-secondary);
+  border: 1px solid var(--ant-color-border);
+}
+
+.msg-author {
+  font-size: 11px;
+  opacity: 0.6;
+  margin-bottom: 2px;
+}

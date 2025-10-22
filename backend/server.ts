@@ -69,7 +69,7 @@ io.on('connection', (socket) => {
   });
 
   // Connect req
-  socket.on('connect', (payload: { fromId: string; toId: string }, ack?: (ok: boolean, err?: string) => void) => {
+  socket.on('connect-request', (payload: { fromId: string; toId: string }, ack?: (ok: boolean, err?: string) => void) => {
     const { fromId, toId } = payload || {};
     if (!fromId || !toId || fromId === toId) {
       ack?.(false, 'Invalid connect payload');
